@@ -1,0 +1,236 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background: url('https://wallpapers.com/images/high/realistic-red-mountain-gmvgjkxqvquq6jvy.webp') no-repeat center center fixed;
+    background-size: cover;
+    color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    color: #fff;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.news-feed {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 15px;
+    margin: 20px;
+    width: calc(100% - 40px);
+    max-width: 1200px;
+    box-sizing: border-box;
+}
+
+.news-feed-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+    text-align: center;
+}
+
+.search-input {
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    border-radius: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.1);
+    margin-bottom: 30px;
+    color: #fff;
+    transition: background 0.3s ease, border-color 0.3s ease;
+    width: 100%;
+    max-width: 600px;
+    box-sizing: border-box;
+}
+
+.search-input:focus {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: #ff6464;
+    outline: none;
+}
+
+.news-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.news-item {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.news-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+}
+
+.news-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.news-item:hover .news-image {
+    transform: scale(1.05);
+}
+
+.news-title {
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: #ff6464;
+    margin: 10px 0;
+    line-height: 1.3;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.news-description {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #e0e0e0;
+    margin-bottom: 15px;
+}
+
+.news-link {
+    display: inline-block;
+    color: #4fd1c5;
+    font-weight: bold;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.news-link:hover {
+    border-color: #4fd1c5;
+    color: #3b7b76;
+}
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.navbar-item {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease, color 0.3s ease;
+    text-align: center;
+}
+
+.navbar-item.active, .navbar-item:hover {
+    background: #ff6464;
+    color: #fff;
+}
+
+
+@media (max-width: 768px) {
+    .news-feed {
+        padding: 20px 10px;
+        margin: 0 10px;
+        width: calc(100% - 20px);
+    }
+
+    .news-feed-title {
+        font-size: 2rem;
+        margin-bottom: 10px;
+    }
+
+    .search-input {
+        font-size: 1rem;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+
+    .news-wrapper {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .news-item {
+        padding: 15px;
+    }
+
+    .news-title {
+        font-size: 1.5rem;
+    }
+
+    .news-description {
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
+
+    .navbar-item {
+        font-size: 1rem;
+        padding: 12px 20px;
+        margin: 5px;
+        width: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .news-feed-title {
+        font-size: 1.8rem;
+    }
+
+    .search-input {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+
+    .news-title {
+        font-size: 1.3rem;
+    }
+
+    .news-description {
+        font-size: 0.9rem;
+    }
+
+    .news-item {
+        padding: 10px;
+    }
+
+    .navbar-item {
+        font-size: 0.9rem;
+        padding: 10px 16px;
+    }
+}
