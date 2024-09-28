@@ -137,7 +137,7 @@ const NewsFeed = () => {
             </div>
           ))
         ) : (
-          !loading && <p>No news articles available with images.</p>
+          !loading && <p>No news articles available.</p>
         )}
       </div>
       {selectedArticle && (
