@@ -1,30 +1,43 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import Login from './components/Login';
 import Register from './components/Register';
 import NewsFeed from './components/NewsFeed';
 
 const App = () => {
-  const [view, setView] = useState('login'); // Default view is login
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/newsfeed" element={<NewsFeed />} />
+      </Routes>
+    </Router>
+  );
+};
+
+const LoginPage = () => {
+  const navigate = useNavigate();
 
   const handleLoginSuccess = () => {
-    setView('newsfeed'); // Switch to newsfeed after login
-  };
-
-  const handleRegisterSuccess = () => {
-    setView('newsfeed'); // Switch to newsfeed after registration
+    navigate('/newsfeed'); // Redirect to NewsFeed after successful login
   };
 
   const handleRegisterClick = () => {
-    setView('register'); // Switch to register view
+    navigate('/register'); // Redirect to Register page
   };
 
-  return (
-    <div>
-      {view === 'login' && <Login onLogin={handleLoginSuccess} onRegisterClick={handleRegisterClick} />}
-      {view === 'register' && <Register onRegister={handleRegisterSuccess} />}
-      {view === 'newsfeed' && <NewsFeed />}
-    </div>
-  );
+  return <Login onLogin={handleLoginSuccess} onRegisterClick={handleRegisterClick} />;
+};
+
+const RegisterPage = () => {
+  const navigate = useNavigate();
+
+  const handleRegisterSuccess = () => {
+    navigate('/newsfeed'); // Redirect to NewsFeed after successful registration
+  };
+
+  return <Register onRegister={handleRegisterSuccess} />;
 };
 
 export default App;

@@ -136,13 +136,33 @@ header {
 
 .navbar {
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 30px;
-    background: rgba(0, 0, 0, 0.7);
-    border-radius: 10px;
+    justify-content: space-between; 
+    align-items: center; 
     padding: 10px;
-}
+    border-bottom: 1px solid #ccc; 
+  }
+  
+  .navbar-categories {
+    display: flex; 
+  }
+  
+  .navbar-actions {
+    margin-left: auto; 
+  }
+
+  .logout-button {
+    background-color: #000000;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 300px; 
+  }
+  
+  .logout-button:hover {
+    background-color: #e95cff; 
+  }
 
 .navbar-item {
     background: rgba(255, 255, 255, 0.1);

@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
+import { auth } from '../firebase'; // Import your Firebase auth module
+import { useNavigate } from 'react-router-dom';
 import './newsfeed.css';
 
 const categories = ['Technology', 'Sports', 'Business', 'Entertainment', 'Health', 'Science'];
@@ -13,8 +15,9 @@ const NewsFeed = () => {
   const [selectedArticle, setSelectedArticle] = useState(null);
   const [page, setPage] = useState(1);
   const [totalResults, setTotalResults] = useState(0);
-  const [bookmarkedArticles, setBookmarkedArticles] = useState(new Set());
   const apiKey = 'f6c765af22c14de5a4a600fd60d1cb60';
+  
+  const navigate = useNavigate(); // Initialize useNavigate for redirection
 
   const fetchNews = useCallback(async (pageNumber) => {
     setLoading(true);
@@ -71,22 +74,6 @@ const NewsFeed = () => {
     setSelectedArticle(null);
   };
 
-  const handleBookmark = (article) => {
-    setBookmarkedArticles(prev => {
-      const updatedBookmarks = new Set(prev);
-      if (updatedBookmarks.has(article.url)) {
-        updatedBookmarks.delete(article.url);
-      } else {
-        updatedBookmarks.add(article.url);
-      }
-      return updatedBookmarks;
-    });
-  };
-
-  const isBookmarked = (article) => {
-    return bookmarkedArticles.has(article.url);
-  };
-
   const handleScroll = (e) => {
     const bottom = e.target.scrollHeight === e.target.scrollTop + e.target.clientHeight;
     if (bottom && !loading && news.length < totalResults) {
@@ -94,18 +81,32 @@ const NewsFeed = () => {
     }
   };
 
+  const handleLogout = async () => {
+    try {
+      await auth.signOut(); // Log out the user
+      navigate('/'); // Redirect to the home page
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
+  };
+
   return (
     <div className="news-feed" onScroll={handleScroll}>
       <nav className="navbar">
-        {categories.map((category, index) => (
-          <button 
-            key={index} 
-            className={`navbar-item ${activeCategory === category ? 'active' : ''}`} 
-            onClick={() => handleCategoryChange(category)}
-          >
-            {category}
-          </button>
-        ))}
+        <div className="navbar-categories">
+          {categories.map((category, index) => (
+            <button 
+              key={index} 
+              className={`navbar-item ${activeCategory === category ? 'active' : ''}`} 
+              onClick={() => handleCategoryChange(category)}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+        <div className="navbar-actions">
+          <button onClick={handleLogout} className="logout-button">Logout</button>
+        </div>
       </nav>
       <h2 className="news-feed-title">Top {activeCategory} News</h2>
       <input 
@@ -131,9 +132,6 @@ const NewsFeed = () => {
                   <a href={article.url} target="_blank" rel="noopener noreferrer" className="news-link">
                     Read more
                   </a>
-                  <button onClick={() => handleBookmark(article)} className="bookmark-button">
-                    {isBookmarked(article) ? 'Unbookmark' : 'Bookmark'}
-                  </button>
                 </div>
               </div>
             </div>

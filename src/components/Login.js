@@ -1,19 +1,27 @@
 import React, { useState } from 'react';
 import { auth, signInWithEmailAndPassword } from '../firebase';
-import './styles.css'; // Import the CSS file for styling
+import './styles.css';
+
+const errorMessages = {
+  'auth/invalid-email': 'The email address is not valid.',
+  'auth/user-disabled': 'This user has been disabled.',
+  'auth/user-not-found': 'No user found with this email address.',
+  'auth/invalid-credential': 'Incorrect password. Please try again.',
+};
 
 const Login = ({ onLogin, onRegisterClick }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState(''); 
 
   const handleLogin = async () => {
+    setErrorMessage('');
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      alert('User logged in successfully!');
-      onLogin();
+      onLogin(); 
     } catch (error) {
       console.error('Error logging in:', error.message);
-      alert(error.message);
+      setErrorMessage(errorMessages[error.code] || 'An unexpected error occurred.'); 
     }
   };
 
@@ -48,6 +56,9 @@ const Login = ({ onLogin, onRegisterClick }) => {
           </label>
         </div>
         <button type="button" onClick={handleLogin}>Log In</button>
+        <div className="error-message">
+          {errorMessage && <p>{errorMessage}</p>} 
+        </div>
         <div className="register">
           <p>Don't have an account? <a href="#" onClick={onRegisterClick}>Register</a></p>
         </div>
