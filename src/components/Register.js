@@ -67,7 +67,7 @@ const Register = ({ onRegister }) => {
           {errorMessage && <p>{errorMessage}</p>} 
         </div>
         <div className="login">
-          <p>Already have an account? <Link to="/">Login here</Link></p>
+          <p>Already have an account? <Link to="/">Login</Link></p>
         </div>
       </form>
     </div>
