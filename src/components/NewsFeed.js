@@ -23,7 +23,7 @@ const NewsFeed = () => {
     setLoading(true);
     setError('');
     try {
-      const response = await axios.get('https://news-aggregator-backend-6l7z.onrender.com//news', {
+      const response = await axios.get('https://news-aggregator-backend-6l7z.onrender.com/news', {
         params: {
           apiKey: apiKey,
           query: query.toLowerCase(),
